@@ -11,11 +11,66 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css" />
 </head>
 <body>
-    <h1>Mapa Interativo de Los Angeles - Crime Predictor</h1>
+    <div class="container">
+        <h1>Crime Predictor - Mapa Interativo de Los Angeles</h1>
 
-    <div id="map"></div>
-    
-    <p id="coordinates"></p>
+        <div id="map"></div>
+        
+        <p id="coordinates"></p>
+
+        <!-- Formulário que será exibido após a confirmação do local -->
+        <div id="crimeForm" style="display: none;">
+            <h2>Detalhes do Crime</h2>
+            <form id="crimeDetailsForm">
+                <div class="form-group">
+                    <label for="victimName">Nome da Vítima:</label>
+                    <input type="text" id="victimName" name="victimName" placeholder="Digite o nome da vítima" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="victimAge">Idade da Vítima:</label>
+                    <input type="number" id="victimAge" name="victimAge" placeholder="Digite a idade da vítima" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="victimSex">Sexo da Vítima:</label>
+                    <select id="victimSex" name="victimSex" required>
+                        <option value="">Selecione</option>
+                        <option value="Masculino">Masculino</option>
+                        <option value="Feminino">Feminino</option>
+                        <option value="Outro">Outro</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="victimEthnicity">Etnia da Vítima:</label>
+                    <input type="text" id="victimEthnicity" name="victimEthnicity" placeholder="Digite a etnia da vítima" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="occurrenceDate">Data da Ocorrência:</label>
+                    <input type="date" id="occurrenceDate" name="occurrenceDate" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="occurrenceTime">Hora da Ocorrência:</label>
+                    <input type="time" id="occurrenceTime" name="occurrenceTime" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="weaponUsed">Arma Utilizada:</label>
+                    <input type="text" id="weaponUsed" name="weaponUsed" placeholder="Descreva a arma">
+                </div>
+
+                <div class="form-group">
+                    <label for="locationInfo">Informação sobre o Local:</label>
+                    <textarea id="locationInfo" name="locationInfo" placeholder="Descreva o local" required></textarea>
+                </div>
+
+                <button type="submit" class="submit-btn">Gerar Predição</button>
+            </form>
+        </div>
+    </div>
 
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
     <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>

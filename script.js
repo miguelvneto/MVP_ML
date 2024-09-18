@@ -55,7 +55,9 @@ map.on('click', function(e) {
             var confirmLocation = confirm("Você quer marcar este local como o local do evento?");
             if (confirmLocation) {
                 document.getElementById('coordinates').innerHTML = "Local marcado em Los Angeles: Latitude: " + lat + ", Longitude: " + lng;
-                // Aqui você pode fazer a requisição para o backend com as coordenadas
+                
+                // Exibir o formulário para o usuário preencher os detalhes do crime
+                document.getElementById('crimeForm').style.display = 'block';
             } else {
                 map.removeLayer(marker);
             }
