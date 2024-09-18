@@ -23,29 +23,43 @@ var geocoder = L.Control.geocoder({
     map.fitBounds(poly.getBounds());
 }).addTo(map);
 
+// Definir a área de Los Angeles usando um polígono aproximado (você pode refinar as coordenadas)
+var laBounds = L.polygon([
+    [34.1614, -118.6682], // Coordenadas aproximadas do canto noroeste de Los Angeles
+    [33.9019, -118.6682], // Sudoeste
+    [33.9019, -118.1219], // Sudeste
+    [34.1614, -118.1219]  // Nordeste
+]).addTo(map);
+
 // Função para registrar o clique do usuário no mapa e confirmar o local
 var marker;
 map.on('click', function(e) {
     var lat = e.latlng.lat;
     var lng = e.latlng.lng;
 
-    // Verifica se já existe um marcador, se sim, remove-o
-    if (marker) {
-        map.removeLayer(marker);
-    }
+    // Verificar se o clique está dentro dos limites de Los Angeles
+    if (map.getBounds().contains(e.latlng) && laBounds.getBounds().contains(e.latlng)) {
+        // Verifica se já existe um marcador, se sim, remove-o
+        if (marker) {
+            map.removeLayer(marker);
+        }
 
-    // Adiciona um novo marcador no local clicado
-    marker = L.marker([lat, lng]).addTo(map);
+        // Adiciona um novo marcador no local clicado
+        marker = L.marker([lat, lng]).addTo(map);
 
-    // Exibir janela de confirmação
-    var confirmLocation = confirm("Você quer marcar este local como o local do evento?");
-    
-    if (confirmLocation) {
-        // Exibir as coordenadas no parágrafo
-        document.getElementById('coordinates').innerHTML = "Local marcado: Latitude: " + lat + ", Longitude: " + lng;
-        // Aqui você pode fazer a requisição para o backend com as coordenadas
+        // Exibir janela de confirmação
+        var confirmLocation = confirm("Você quer marcar este local como o local do evento?");
+        
+        if (confirmLocation) {
+            // Exibir as coordenadas no parágrafo
+            document.getElementById('coordinates').innerHTML = "Local marcado: Latitude: " + lat + ", Longitude: " + lng;
+            // Aqui você pode fazer a requisição para o backend com as coordenadas
+        } else {
+            // Se o usuário cancelar, remove o marcador
+            map.removeLayer(marker);
+        }
     } else {
-        // Se o usuário cancelar, remove o marcador
-        map.removeLayer(marker);
+        // Exibir alerta caso o local esteja fora de Los Angeles
+        alert("O local clicado está fora da área de Los Angeles, por favor escolha um local dentro da cidade.");
     }
 });
