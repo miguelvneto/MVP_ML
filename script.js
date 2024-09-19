@@ -1,74 +1,57 @@
-// Criar o mapa centrado em Los Angeles (coordenadas aproximadas de Los Angeles)
-var map = L.map('map').setView([34.0522, -118.2437], 12);
+document.getElementById('lungCancerForm').addEventListener('submit', function (e) {
+    e.preventDefault();  // Prevent form from submitting the default way
 
-// Adicionar camada do mapa (usando OpenStreetMap)
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-}).addTo(map);
+    // Get the form data
+    const formData = {
+        age: document.getElementById('age').value,
+        gender: document.getElementById('gender').value,
+        smoking: document.getElementById('smoking').value,
+        yellow_fingers: document.getElementById('yellow_fingers').value,
+        anxiety: document.getElementById('anxiety').value,
+        peer_pressure: document.getElementById('peer_pressure').value,
+        chronic_disease: document.getElementById('chronic_disease').value,
+        fatigue: document.getElementById('fatigue').value,
+        allergy: document.getElementById('allergy').value,
+        wheezing: document.getElementById('wheezing').value,
+        alcohol_consumption: document.getElementById('alcohol_consumption').value,
+        coughing: document.getElementById('coughing').value,
+        shortness_of_breath: document.getElementById('shortness_of_breath').value,
+        chest_pain: document.getElementById('chest_pain').value
+    };
 
-// Adicionar a barra de pesquisa para encontrar locais
-var geocoder = L.Control.geocoder({
-    defaultMarkGeocode: false
-})
-.on('markgeocode', function(e) {
-    var bbox = e.geocode.bbox;
-    var poly = L.polygon([
-        [bbox.getSouthEast().lat, bbox.getSouthEast().lng],
-        [bbox.getNorthEast().lat, bbox.getNorthEast().lng],
-        [bbox.getNorthWest().lat, bbox.getNorthWest().lng],
-        [bbox.getSouthWest().lat, bbox.getSouthWest().lng]
-    ]).addTo(map);
+    // Simulate an API request to predict lung cancer (for testing purpose, since there's no actual API connected)
+    // Replace this block with actual API call if needed
 
-    // Centralizar o mapa no local pesquisado
-    map.fitBounds(poly.getBounds());
-}).addTo(map);
+    const resultDiv = document.getElementById('result');
+    resultDiv.innerHTML = `<p>Loading...</p>`;  // Show loading message while processing
 
-// Função de geocodificação reversa usando a API do Nominatim para identificar a cidade
-function reverseGeocode(lat, lng) {
-    var url = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}&zoom=10&addressdetails=1`;
+    // Simulate a delay to mimic an API call
+    setTimeout(function () {
+        // Simulate a random prediction result
+        const prediction = Math.random() > 0.5 ? 'High Risk of Lung Cancer' : 'Low Risk of Lung Cancer';
 
-    return fetch(url)
-        .then(response => response.json())
-        .then(data => {
-            // Retornar o nome da cidade
-            return data.address.city || data.address.town || data.address.village || "Desconhecido";
-        });
-}
+        // Display the result back to the user
+        resultDiv.innerHTML = `<p><strong>Prediction:</strong> ${prediction}</p>`;
+    }, 2000);  // Simulate 2 second delay for "processing"
 
-// Função para registrar o clique do usuário no mapa e confirmar o local
-var marker;
-map.on('click', function(e) {
-    var lat = e.latlng.lat;
-    var lng = e.latlng.lng;
+    /*
+    // Uncomment the following section if you have a real API to send data to
 
-    // Verifica se já existe um marcador, se sim, remove-o
-    if (marker) {
-        map.removeLayer(marker);
-    }
-
-    // Adiciona um novo marcador no local clicado
-    marker = L.marker([lat, lng]).addTo(map);
-
-    // Executa a geocodificação reversa para identificar a cidade
-    reverseGeocode(lat, lng).then(city => {
-        if (city === "Los Angeles") {
-            var confirmLocation = confirm("Você quer marcar este local como o local do evento?");
-            if (confirmLocation) {
-                document.getElementById('coordinates').innerHTML = "Local marcado em Los Angeles: Latitude: " + lat + ", Longitude: " + lng;
-                
-                // Exibir o formulário para o usuário preencher os detalhes do crime
-                document.getElementById('crimeForm').style.display = 'block';
-            } else {
-                map.removeLayer(marker);
-            }
-        } else {
-            // Se o local estiver fora de Los Angeles, remove o marcador e exibe um alerta
-            map.removeLayer(marker);
-            alert("O local clicado está fora de Los Angeles. Por favor, escolha um local dentro de Los Angeles.");
-        }
-    }).catch(error => {
-        console.error("Erro na geocodificação reversa:", error);
-        alert("Não foi possível determinar a cidade. Tente novamente.");
-        map.removeLayer(marker);
+    fetch('https://example.com/api/predict', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(formData)
+    })
+    .then(response => response.json())
+    .then(data => {
+        // Display the prediction result in the result div
+        resultDiv.innerHTML = `<p><strong>Prediction:</strong> ${data.prediction}</p>`;
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        resultDiv.innerHTML = `<p style="color: red;">An error occurred. Please try again later.</p>`;
     });
+    */
 });

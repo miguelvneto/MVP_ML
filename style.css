@@ -1,104 +1,99 @@
-/* Global Styles */
+/* General body styling */
 body {
     font-family: 'Arial', sans-serif;
+    background-color: #f7f9fc;
     margin: 0;
     padding: 0;
-    background-color: #f4f4f9;
-    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
 }
 
+/* Container styling for the form */
 .container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
-    text-align: center;
+    background-color: #ffffff;
+    max-width: 700px;
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
 }
 
-h1 {
-    font-size: 2.5em;
+/* Form header styles */
+.form-header h1 {
+    text-align: center;
     color: #333;
+    font-size: 28px;
+    margin-bottom: 15px;
+}
+
+.form-header p {
+    text-align: center;
+    color: #555;
+    font-size: 16px;
+    margin-bottom: 25px;
+}
+
+/* Styling for form fields */
+.form-group {
     margin-bottom: 20px;
 }
 
-#map {
-    height: 500px;
-    width: 100%;
-    margin: 20px 0;
-    border-radius: 10px;
-    border: 3px solid #007bff;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-#coordinates {
-    font-size: 1.2em;
-    color: #007bff;
-    margin-top: 10px;
-}
-
-#crimeForm {
-    background-color: #ffffff;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    margin-top: 20px;
-    text-align: left;
-}
-
-h2 {
-    font-size: 1.8em;
-    margin-bottom: 15px;
-    color: #333;
-}
-
-/* Form Styles */
-.form-group {
-    margin-bottom: 15px;
-}
-
 label {
-    font-weight: bold;
-    display: block;
-    margin-bottom: 5px;
+    font-size: 16px;
     color: #333;
+    font-weight: 600;
 }
 
-input[type="text"],
-input[type="date"],
-input[type="time"],
-input[type="number"],
-textarea,
-select {
+input, select {
     width: 100%;
-    padding: 10px;
-    font-size: 1em;
-    border: 2px solid #ccc;
-    border-radius: 5px;
-    box-sizing: border-box;
+    padding: 12px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin-top: 8px;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
 }
 
-textarea {
-    height: 100px;
-}
-
-input:focus, textarea:focus, select:focus {
+/* Focus state for form fields */
+input:focus, select:focus {
     border-color: #007bff;
-    outline: none;
     box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+    outline: none;
 }
 
-/* Submit Button */
-.submit-btn {
+/* Submit button styles */
+button {
+    width: 100%;
+    padding: 15px;
     background-color: #007bff;
     color: white;
-    padding: 10px 20px;
+    font-size: 18px;
+    font-weight: bold;
     border: none;
-    border-radius: 5px;
+    border-radius: 8px;
     cursor: pointer;
-    font-size: 1.2em;
-    transition: background-color 0.3s ease;
-    width: 100%;
+    margin-top: 15px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
-.submit-btn:hover {
+/* Hover effect for the submit button */
+button:hover {
     background-color: #0056b3;
+    transform: scale(1.02);
+}
+
+/* Styling for the prediction result */
+.result {
+    margin-top: 20px;
+    font-size: 18px;
+    text-align: center;
+    color: #333;
+}
+
+.result p {
+    font-weight: bold;
+    font-size: 20px;
+    color: #00b33c;
 }
