@@ -1,6 +1,6 @@
 # MVP - Predição de Câncer de Pulmão
 
-Este projeto tem como objetivo a construção de um sistema de predição de câncer de pulmão utilizando técnicas de Machine Learning. O modelo é treinado com dados de saúde de indivíduos, e a previsão é feita com base em fatores como idade, gênero, hábitos de fumo, entre outros. O projeto também inclui o salvamento de predições em um banco de dados SQLite.
+Este projeto tem como objetivo a construção de um sistema de predição de câncer de pulmão utilizando técnicas de Machine Learning. O modelo é treinado com dados de saúde de indivíduos, e a previsão é feita com base em fatores como idade, gênero, hábitos de fumo, entre outros.
 
 ## Estrutura do Projeto
 
@@ -13,7 +13,7 @@ Este projeto tem como objetivo a construção de um sistema de predição de câ
 ## Requisitos
 
 - Python 3.8+
-- Bibliotecas: `pandas`, `numpy`, `matplotlib`, `scikit-learn`, `sqlite3`, `pickle`
+- Bibliotecas: `pandas`, `numpy`, `matplotlib`, `scikit-learn`, `pickle`
 
 ## Instruções de Uso
 
